@@ -1,0 +1,41 @@
+<div class="form-container">
+  <h2>Kategori Ekle</h2>
+
+  <div *ngIf="errorMessage" class="error-alert">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="success-alert">
+    {{ successMessage }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #categoryForm="ngForm">
+    <div class="form-group">
+      <label for="category">Yeni Kategori Adı</label>
+      <input
+        type="text"
+        id="category"
+        name="category"
+        [(ngModel)]="newCategory"
+        required
+        class="form-control"
+        placeholder="Kategori adını girin">
+    </div>
+
+    <div class="current-categories">
+      <h3>Mevcut Kategoriler</h3>
+      <ul>
+        <li *ngFor="let category of categories">{{ category }}</li>
+      </ul>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="!categoryForm.form.valid">
+        Kategori Ekle
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">
+        İptal
+      </button>
+    </div>
+  </form>
+</div>

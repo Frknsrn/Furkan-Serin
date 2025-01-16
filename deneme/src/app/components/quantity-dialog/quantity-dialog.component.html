@@ -1,0 +1,40 @@
+<div class="dialog-overlay" *ngIf="show" (click)="onCancel()">
+  <div class="dialog" (click)="$event.stopPropagation()">
+    <div class="dialog-header">
+      <h3>Miktar Seçin</h3>
+      <button class="btn-close" (click)="onCancel()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="dialog-content">
+      <div class="item-info" *ngIf="item">
+        <h4>{{ item.name }}</h4>
+        <p class="price">{{ item.price | currency:'TRY':'symbol-narrow':'1.2-2' }}</p>
+      </div>
+
+      <div class="quantity-selector">
+        <button class="btn btn-quantity" (click)="decrementQuantity()">
+          <i class="fas fa-minus"></i>
+        </button>
+        <input 
+          type="number" 
+          [(ngModel)]="quantity" 
+          min="1" 
+          class="quantity-input">
+        <button class="btn btn-quantity" (click)="incrementQuantity()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+      <div class="total-price" *ngIf="item">
+        Toplam: {{ item.price * quantity | currency:'TRY':'symbol-narrow':'1.2-2' }}
+      </div>
+    </div>
+
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" (click)="onCancel()">İptal</button>
+      <button class="btn btn-primary" (click)="onConfirm()">Sepete Ekle</button>
+    </div>
+  </div>
+</div>

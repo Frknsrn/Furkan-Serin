@@ -1,0 +1,40 @@
+<div class="form-container">
+  <h2>Bütçe Güncelle</h2>
+  
+  <div *ngIf="errorMessage" class="error-alert">
+    {{ errorMessage }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #budgetForm="ngForm">
+    <div class="form-group">
+      <label for="currentBudget">Mevcut Bütçe</label>
+      <div class="current-budget">
+        {{ currentBudget | currency:'TRY':'symbol-narrow':'1.2-2' }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="newBudget">Bütçe Ekle</label>
+      <input
+        type="number"
+        id="newBudget"
+        name="newBudget"
+        [(ngModel)]="newBudget"
+        required
+        min="0"
+        step="0.01"
+        #budget="ngModel"
+        class="form-control">
+      <div *ngIf="budget.invalid && (budget.dirty || budget.touched)" class="error-message">
+        Geçerli bir tutar giriniz
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">İptal</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!budgetForm.form.valid">
+        Ekle
+      </button>
+    </div>
+  </form>
+</div>
