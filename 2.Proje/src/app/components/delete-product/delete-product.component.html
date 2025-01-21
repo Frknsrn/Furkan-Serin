@@ -1,0 +1,142 @@
+<div class="page-container">
+  <div class="form-container">
+    <h2 class="page-title">Ürün Düzenle</h2>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      <i class="fas fa-exclamation-circle"></i>
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      <i class="fas fa-check-circle"></i>
+      {{ successMessage }}
+    </div>
+
+    <!-- Ürün Seçimi -->
+    <div class="product-select">
+      <label for="productSelect" class="form-label">Düzenlenecek Ürünü Seçin</label>
+      <select
+        id="productSelect"
+        class="form-control"
+        (change)="onProductSelect($event)"
+      >
+        <option value="" disabled selected>Ürün seçin</option>
+        <option *ngFor="let item of storeItems" [value]="item.id">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Ürün Düzenleme Formu -->
+    <form *ngIf="selectedProduct" (ngSubmit)="onSubmit()" #productForm="ngForm" class="product-form">
+      <div class="form-grid">
+        <!-- Sol Kolon -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="name" class="form-label">Ürün Adı</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              [(ngModel)]="selectedProduct.name"
+              required
+              placeholder="Ürün adını girin"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="category" class="form-label">Kategori</label>
+            <select
+              id="category"
+              name="category"
+              class="form-control"
+              [(ngModel)]="selectedProduct.category"
+              required
+            >
+              <option value="" disabled>Kategori seçin</option>
+              <option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="price" class="form-label">Fiyat (₺)</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form-control"
+              [(ngModel)]="selectedProduct.price"
+              required
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="stock" class="form-label">Stok Miktarı</label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              class="form-control"
+              [(ngModel)]="selectedProduct.stock"
+              required
+              min="0"
+              placeholder="Stok miktarını girin"
+            >
+          </div>
+        </div>
+
+        <!-- Sağ Kolon -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="description" class="form-label">Ürün Açıklaması</label>
+            <textarea
+              id="description"
+              name="description"
+              class="form-control"
+              [(ngModel)]="selectedProduct.description"
+              required
+              rows="4"
+              placeholder="Ürün açıklamasını girin"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="image" class="form-label">Ürün Görseli</label>
+            <div class="image-upload-container">
+              <input
+                type="file"
+                id="image"
+                (change)="onImageSelected($event)"
+                accept="image/*"
+                class="form-control"
+              >
+              <div class="image-preview" *ngIf="selectedProduct.image">
+                <img [src]="selectedProduct.image" alt="Ürün önizleme">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" (click)="onDelete()">
+          <i class="fas fa-trash-alt"></i> Sil
+        </button>
+        <div class="action-buttons">
+          <button type="button" class="btn btn-secondary" routerLink="/store">
+            <i class="fas fa-times"></i> İptal
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">
+            <i class="fas fa-save"></i> Kaydet
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

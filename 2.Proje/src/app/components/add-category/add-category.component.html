@@ -1,0 +1,54 @@
+<div class="categories-container">
+  <h2>Kategori Yönetimi</h2>
+  <p class="subtitle">Yeni kategori ekleyin ve mevcut kategorileri görüntüleyin</p>
+
+  <!-- Yeni Kategori Ekleme Formu -->
+  <div class="add-category-form">
+    <div class="form-group">
+      <label for="categoryName">Yeni Kategori Adı</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="categoryName"
+          [(ngModel)]="newCategoryName"
+          placeholder="Kategori adını girin..."
+          class="form-control"
+        >
+        <button (click)="addCategory()" class="add-btn">
+          <i class="fas fa-plus"></i>
+          Ekle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hata ve Başarı Mesajları -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+
+  <!-- Mevcut Kategoriler -->
+  <div class="categories-section">
+    <h3>Mevcut Kategoriler</h3>
+    <div class="categories-grid">
+      <div *ngFor="let category of categories" class="category-card">
+        <div class="category-content">
+          <i class="fas fa-tag"></i>
+          <span class="category-name">{{ category }}</span>
+        </div>
+        <button (click)="deleteCategory(category)" class="delete-btn">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Kategori Yoksa -->
+    <div *ngIf="categories.length === 0" class="no-categories">
+      <i class="fas fa-folder-open"></i>
+      <p>Henüz kategori bulunmamaktadır.</p>
+    </div>
+  </div>
+</div>

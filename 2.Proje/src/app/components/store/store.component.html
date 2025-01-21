@@ -1,0 +1,39 @@
+<div class="store-container">
+  <div class="categories">
+    <h2>Kategoriler</h2>
+    <div class="category-list">
+      <button class="category-btn" 
+        [class.active]="selectedCategory === ''"
+        (click)="onCategorySelect('')">
+        Tüm Ürünler
+      </button>
+      <button 
+        *ngFor="let category of categories"
+        class="category-btn"
+        [class.active]="selectedCategory === category"
+        (click)="onCategorySelect(category)">
+        {{ category }}
+      </button>
+    </div>
+  </div>
+
+  <div class="products-container">
+    <h2>{{ selectedCategory || 'Tüm Ürünler' }}</h2>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let item of storeItems">
+        <div class="product-image">
+          <img [src]="item.image" [alt]="item.name">
+        </div>
+        <div class="product-info">
+          <h3>{{ item.name }}</h3>
+          <p class="description">{{ item.description }}</p>
+          <p class="price">{{ item.price | currency:'TRY':'symbol-narrow':'1.2-2' }}</p>
+          <p class="stock">Stok: {{ item.stock }}</p>
+          <button class="btn btn-primary" (click)="addToCart(item)" [disabled]="item.stock === 0">
+            {{ item.stock === 0 ? 'Stokta Yok' : 'Sepete Ekle' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

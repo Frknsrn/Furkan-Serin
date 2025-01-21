@@ -1,0 +1,44 @@
+<div class="user-dashboard">
+  <div class="dashboard-header">
+    <h1>Hoş Geldiniz, {{ currentUser?.name }}</h1>
+    <div class="user-info">
+      <div class="balance">
+        <i class="fas fa-wallet"></i>
+        <span>Bakiye: {{ currentUser?.balance }} TL</span>
+      </div>
+      <button (click)="onLogout()" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="quick-actions">
+      <h2>Hızlı İşlemler</h2>
+      <div class="action-buttons">
+        <button routerLink="/store" class="action-btn">
+          <i class="fas fa-store"></i>
+          Mağazaya Git
+        </button>
+        <button routerLink="/list" class="action-btn">
+          <i class="fas fa-shopping-basket"></i>
+          Sepetim
+        </button>
+        <button routerLink="/budget" class="action-btn">
+          <i class="fas fa-wallet"></i>
+          Bütçe Yönetimi
+        </button>
+      </div>
+    </div>
+
+    <div class="recent-activity">
+      <h2>Son İşlemler</h2>
+      <div class="activity-list">
+        <!-- Buraya son işlemler eklenecek -->
+        <div class="no-activity">
+          Henüz işlem bulunmuyor.
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

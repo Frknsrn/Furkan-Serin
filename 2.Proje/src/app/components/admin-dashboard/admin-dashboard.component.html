@@ -1,0 +1,89 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Hoş Geldiniz, {{ currentUser?.name }}</h1>
+    <div class="user-info">
+      <div class="balance">
+        <i class="fas fa-wallet"></i>
+        <span>Bakiye: {{ currentUser?.balance }} TL</span>
+      </div>
+      <button (click)="onLogout()" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+      </button>
+    </div>
+  </div>
+
+  <div class="dashboard-content">
+    <div class="quick-actions">
+      <h2>Hızlı İşlemler</h2>
+      <div class="action-buttons">
+        <button routerLink="/store" class="action-btn">
+          <i class="fas fa-store"></i>
+          Mağazaya Git
+        </button>
+        <button routerLink="/add-product" class="action-btn">
+          <i class="fas fa-box-open"></i>
+          Ürün Ekle
+        </button>
+        <button routerLink="/delete-product" class="action-btn">
+          <i class="fas fa-edit"></i>
+          Ürün Düzenle
+        </button>
+        <button routerLink="/add-category" class="action-btn">
+          <i class="fas fa-tags"></i>
+          Kategori Yönetimi
+        </button>
+        <button routerLink="/earnings" class="action-btn">
+          <i class="fas fa-chart-line"></i>
+          Kazanç Takibi
+        </button>
+        <button routerLink="/customer-budgets" class="action-btn">
+          <i class="fas fa-users"></i>
+          Müşteri Bütçeleri
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-section">
+      <h2>İstatistikler</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fas fa-users"></i>
+          <div class="stat-info">
+            <span class="stat-value">{{ users.length }}</span>
+            <span class="stat-label">Toplam Kullanıcı</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="stat-info">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Toplam Sipariş</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-box"></i>
+          <div class="stat-info">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Toplam Ürün</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-money-bill-wave"></i>
+          <div class="stat-info">
+            <span class="stat-value">0 TL</span>
+            <span class="stat-label">Toplam Kazanç</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recent-activity">
+      <h2>Son İşlemler</h2>
+      <div class="activity-list">
+        <div class="no-activity">
+          Henüz işlem bulunmuyor.
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

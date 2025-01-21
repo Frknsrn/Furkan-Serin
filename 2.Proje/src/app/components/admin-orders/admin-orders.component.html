@@ -1,0 +1,60 @@
+<div class="admin-orders">
+  <div class="tabs">
+    <button 
+      [class.active]="activeTab === 'pending'"
+      (click)="activeTab = 'pending'">
+      <i class="fas fa-clock"></i>
+      Bekleyen Siparişler
+    </button>
+    <button 
+      [class.active]="activeTab === 'approved'"
+      (click)="activeTab = 'approved'">
+      <i class="fas fa-check"></i>
+      Onaylanan Siparişler
+    </button>
+    <button 
+      [class.active]="activeTab === 'rejected'"
+      (click)="activeTab = 'rejected'">
+      <i class="fas fa-times"></i>
+      Reddedilen Siparişler
+    </button>
+  </div>
+
+  <div class="orders-container">
+    <div *ngIf="getFilteredOrders().length === 0" class="no-orders">
+      {{ activeTab === 'pending' ? 'Bekleyen' : activeTab === 'approved' ? 'Onaylanan' : 'Reddedilen' }} sipariş bulunmamaktadır.
+    </div>
+
+    <div *ngFor="let order of getFilteredOrders()" class="order-card">
+      <div class="order-header">
+        <div class="order-info">
+          <h3>Sipariş #{{ order.id }}</h3>
+          <span class="customer-name">{{ order.userName }}</span>
+          <span class="order-date">{{ order.orderDate | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="order-total">
+          Toplam: {{ order.totalAmount }} TL
+        </div>
+      </div>
+
+      <div class="order-products">
+        <div *ngFor="let product of order.products" class="product-item">
+          <span class="product-name">{{ product.name }}</span>
+          <span class="product-quantity">{{ product.quantity }} adet</span>
+          <span class="product-price">{{ product.price }} TL</span>
+        </div>
+      </div>
+
+      <div class="order-actions" *ngIf="activeTab === 'pending'">
+        <button class="approve-btn" (click)="approveOrder(order.id)">
+          <i class="fas fa-check"></i>
+          Onayla
+        </button>
+        <button class="reject-btn" (click)="rejectOrder(order.id)">
+          <i class="fas fa-times"></i>
+          Reddet
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,43 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Ürün Düzenle' : 'Sepete Ürün Ekle' }}</h2>
+  
+  <div *ngIf="errorMessage" class="error-alert">
+    {{ errorMessage }}
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #itemForm="ngForm">
+    <div class="form-group" *ngIf="!isEditMode">
+      <label for="storeItem">Ürün Seçin</label>
+      <select
+        id="storeItem"
+        name="storeItem"
+        (change)="onStoreItemSelect($event)"
+        required
+        class="form-control">
+        <option value="">Ürün Seçin</option>
+        <option *ngFor="let storeItem of storeItems" [value]="storeItem.id">
+          {{ storeItem.name }} - {{ storeItem.price | currency:'TRY':'symbol-narrow':'1.2-2' }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Miktar</label>
+      <input
+        type="number"
+        id="quantity"
+        name="quantity"
+        [(ngModel)]="item.quantity"
+        required
+        min="1"
+        class="form-control">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">İptal</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid">
+        {{ isEditMode ? 'Güncelle' : 'Sepete Ekle' }}
+      </button>
+    </div>
+  </form>
+</div>

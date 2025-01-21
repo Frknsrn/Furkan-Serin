@@ -1,0 +1,32 @@
+<div class="customers-container">
+  <h2>Müşteri Bütçeleri</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div class="customers-grid">
+    <div *ngFor="let customer of customers" class="customer-card">
+      <div class="customer-info">
+        <div class="customer-header">
+          <i class="fas fa-user"></i>
+          <h3>{{ customer.name }}</h3>
+        </div>
+        <p class="customer-email">{{ customer.email }}</p>
+      </div>
+      
+      <div class="balance-info">
+        <div class="current-balance">
+          <i class="fas fa-wallet"></i>
+          <span>Mevcut Bakiye:</span>
+          <span class="balance-amount">{{ customer.balance }} TL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="customers.length === 0" class="no-customers">
+    <i class="fas fa-users-slash"></i>
+    <p>Henüz müşteri bulunmamaktadır.</p>
+  </div>
+</div> 

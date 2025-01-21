@@ -1,0 +1,61 @@
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <a routerLink="/" class="navbar-brand">
+        Götür <i class="fas fa-truck-fast"></i>
+      </a>
+      <div class="nav-links">
+        <a routerLink="/store" routerLinkActive="active" class="nav-link">
+          <i class="fas fa-store-alt"></i> Mağaza
+        </a>
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <ng-container *ngIf="authService.isAdmin()">
+            <a routerLink="/list" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-shopping-basket"></i> Sepetim
+            </a>
+            <a routerLink="/add-product" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-box-open"></i> Ürün Ekle
+            </a>
+            <a routerLink="/delete-product" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-edit"></i> Ürün Düzenle
+            </a>
+            <a routerLink="/add-category" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-tags"></i> Kategori
+            </a>
+            <a routerLink="/earnings" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-chart-line"></i> Kazançlar
+            </a>
+            <a routerLink="/customer-budgets" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-users"></i> Müşteri Bütçeleri
+            </a>
+            <a routerLink="/budget" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-wallet"></i> Bütçe
+            </a>
+            <a routerLink="/admin-dashboard" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-user-shield"></i> Admin Panel
+            </a>
+            <li *ngIf="currentUser?.isAdmin" class="nav-item">
+              <a class="nav-link" routerLink="/admin-orders" routerLinkActive="active">
+                <i class="fas fa-tasks"></i>
+                Sipariş Yönetimi
+              </a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="!authService.isAdmin()">
+            <a routerLink="/list" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-shopping-basket"></i> Sepetim
+            </a>
+            <a routerLink="/budget" routerLinkActive="active" class="nav-link">
+              <i class="fas fa-wallet"></i> Bütçe
+            </a>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!authService.isLoggedIn()">
+          <a routerLink="/login" routerLinkActive="active" class="nav-link login-btn">
+            <i class="fas fa-user"></i> Giriş Yap
+          </a>
+        </ng-container>
+      </div>
+    </div>
+  </nav>
+</header>

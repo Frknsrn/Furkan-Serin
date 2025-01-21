@@ -1,0 +1,37 @@
+<div class="shopping-list">
+  <div class="list-header">
+    <h2>Alışveriş Listesi</h2>
+    <div class="budget-info">
+      <p>Kalan Bütçe: <strong>{{ totalBudget | currency:'TRY':'symbol-narrow':'1.2-2' }}</strong></p>
+    </div>
+  </div>
+
+  <div *ngIf="orderConfirmed" class="message success">
+    Alışverişiniz başarıyla tamamlandı!
+  </div>
+  
+  <div class="list-items">
+    <div class="item" *ngFor="let item of items">
+      <div class="item-details">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.quantity }} adet x {{ item.price | currency:'TRY':'symbol-narrow':'1.2-2' }}</p>
+        <p class="item-total">Toplam: {{ getItemTotal(item) | currency:'TRY':'symbol-narrow':'1.2-2' }}</p>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-edit" (click)="editItem(item)">Düzenle</button>
+        <button class="btn btn-delete" (click)="deleteItem(item)">Sil</button>
+      </div>
+    </div>
+    
+    <div *ngIf="items.length === 0" class="empty-list">
+      <p>Henüz ürün eklenmemiş.</p>
+      <button class="btn btn-primary" routerLink="/store">Alışverişe Başla</button>
+    </div>
+  </div>
+
+  <div *ngIf="items.length > 0" class="order-actions">
+    <button class="btn btn-confirm" (click)="confirmOrder()">
+      <i class="fas fa-check"></i> Siparişi Onayla
+    </button>
+  </div>
+</div>

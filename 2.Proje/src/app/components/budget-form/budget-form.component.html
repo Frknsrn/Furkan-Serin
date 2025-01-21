@@ -1,0 +1,33 @@
+<div class="budget-container">
+  <div class="budget-box">
+    <h2>Bakiye Yönetimi</h2>
+    <div class="current-balance">
+      <i class="fas fa-wallet"></i>
+      <span>Mevcut Bakiye: {{ currentUser?.balance }} TL</span>
+    </div>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="amount">Eklenecek Miktar</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          [(ngModel)]="amount"
+          required
+          min="0"
+          placeholder="Eklemek istediğiniz miktar"
+        >
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+
+      <button type="submit">Bakiye Ekle</button>
+    </form>
+  </div>
+</div>
